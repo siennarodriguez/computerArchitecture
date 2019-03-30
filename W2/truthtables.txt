@@ -1,0 +1,45 @@
+WEEK 2 TUTORIAL
+
+Truth Table: 2 to 8 line decoder
+A0	A1	D0	D1	D2	D3
+0	0	1	0	0	0
+1	0	0	1	0	0
+0	1	0	0	1	0
+1	1	0	0	0	1
+
+Truth Table: 3 to 8 line decoder 
+A0	A1	A2	D0	D1	D2	D3	D4	D5	D6	D7
+0	0	0	0	0	0	0	0	0	0	1
+0	0	1	0	0	0	0	0	0	1	0
+0	1	0	0	0	0	0	0	1	0	0
+0	1	1	0	0	0	0	1	0	0	0
+1	0	0	0	0	0	1	0	0	0	0
+1	0	1	0	0	1	0	0	0	0	0
+1	1	0	0	1	0	0	0	0	0	0
+1	1	1	1	0	0	0	0	0	0	0
+Truth Table: 4 to 16 line decoder 
+
+	A0	A1	A2	A3	D0	D1	D2	D3	D4	D5	D6	D7	D8	D9	D10	D11	D12	D13	D14	D15
+D0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1
+D1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0
+D2	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0
+D3	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
+D4	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0
+D5	0	1	0	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+D6	0	1	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0
+D7	0	1	1	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0
+D8	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0
+D9	1	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0
+D10	1	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0
+D11	1	0	1	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0
+D12	1	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0
+D13	1	1	0	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0
+D14	1	1	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+D15	1	1	1	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+
+
+Why we use subcircuits 
+Better optimization for larger circuits that use multiple smaller circuits. Condenses everything. 
+Breaks large job into bite-sized pieces, saves defining the same concept multiple times, facilitate debugging
+
+

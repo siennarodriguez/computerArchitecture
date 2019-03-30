@@ -1,0 +1,657 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>FIT2069 Computer
+Architecture / Laboratory #1</title>
+</head>
+<body
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ link="#ff0000" vlink="#990000" alink="#cc0000">
+<table width="1024" align="center" border="0" cellpadding="2"
+ cellspacing="0">
+  <tbody>
+    <tr>
+      <td valign="top" width="64"><br>
+      </td>
+      <td valign="top" align="center"><img alt=""
+ src="http://www.csse.monash.edu.au/%7Ecarlo/LogoRGB-128-T.png"
+ height="137" width="128"><br>
+      </td>
+      <td valign="top" width="64"><br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><font face="Helvetica, Arial, sans-serif"><br>
+      </font></td>
+      <td valign="top"><font face="Helvetica, Arial, sans-serif"><br>
+      </font></td>
+      <td valign="top" width="64"><font
+ face="Helvetica, Arial, sans-serif"><br>
+      </font></td>
+    </tr>
+    <tr>
+      <td valign="top"><font face="Helvetica, Arial, sans-serif"><br>
+      </font></td>
+      <td valign="top" align="center"><b><font
+ face="Helvetica, Arial, sans-serif"><big><big><big>FIT2069 Computer
+Architecture</big></big></big><br>
+      <br>
+      <big><big>Assembly Language Notes<br>
+      <br>
+      </big>Dr C Kopp, SMIEEE, SMAIAA, PEng<br>
+Monash University, April, 2011<br>
+      </big> </font></b></td>
+      <td valign="top" width="64"><font
+ face="Helvetica, Arial, sans-serif"><br>
+      </font></td>
+    </tr>
+    <tr>
+      <td valign="top"><font face="Helvetica, Arial, sans-serif"><br>
+      </font></td>
+      <td valign="top"><font face="Helvetica, Arial, sans-serif"><br>
+      </font></td>
+      <td valign="top" width="64"><font
+ face="Helvetica, Arial, sans-serif"><br>
+      </font></td>
+    </tr>
+    <tr>
+      <td valign="top"><br>
+      </td>
+      <td valign="top">
+      <hr size="2" width="100%"><big><big><b>MIPS Assembler</b></big></big><big><big><b>
+Beginner's Guide </b></big></big>
+      <hr size="2" width="100%"></td>
+      <td valign="top"><br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><br>
+      </td>
+      <td valign="top"><br>
+      </td>
+      <td valign="top"><br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><font face="Helvetica, Arial, sans-serif"><br>
+      </font></td>
+      <td valign="top" align="justify"><font
+ face="Helvetica, Arial, sans-serif">Learning assembly language
+programming can often result in &#8220;culture shock&#8221;&nbsp; for students who
+have previously only programmed in high level languages. <br>
+      <br>
+In high level language programming, the language syntax, interpreter or
+compiler and runtime environment hide the often complicated details of
+the hardware from the programmer. This is intentional, since one of the
+basic ideas behind programming languages is to make the code as
+independent of the machine as possible, for reasons such as portability.<br>
+      <br>
+Assembly language exposes the raw details of the machine to the
+programmer. The programmer must perform all of the </font><font
+ face="Helvetica, Arial, sans-serif">&#8220;housekeeping&#8221; which in a high
+level language is performed mostly by the compiler or interpreter.<br>
+      <br>
+The need to manage the state of the machine and the program is often
+found to be difficult by inexperienced assembly language programmers -
+it is additional work in the design, writing and debugging of the
+program which is absent in high level language programming.<br>
+      <br>
+Another major difference between high level languages and assembler is
+that in high level languages operators are expressed in simple syntax,
+whereas in assembler, specific opcodes are used instead. Some examples
+follow:<br>
+      <br>
+      </font>
+      <table width="100%" border="0" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td valign="top"><b><font
+ face="Helvetica, Arial, sans-serif">Operator<br>
+            </font></b></td>
+            <td valign="top"><b><font
+ face="Helvetica, Arial, sans-serif">Java / C / C++ Operator<br>
+            </font></b></td>
+            <td valign="top"><b><font
+ face="Helvetica, Arial, sans-serif">MIPS Opcode<br>
+            </font></b></td>
+          </tr>
+          <tr>
+            <td valign="top"><b><font
+ face="Helvetica, Arial, sans-serif">Addition</font><br>
+            </b></td>
+            <td valign="top"><font face="Helvetica, Arial, sans-serif">+<br>
+            </font></td>
+            <td valign="top"><font face="Helvetica, Arial, sans-serif">ADD<br>
+            </font></td>
+          </tr>
+          <tr>
+            <td valign="top"><b><font
+ face="Helvetica, Arial, sans-serif">Subtraction<br>
+            </font></b></td>
+            <td valign="top"><font face="Helvetica, Arial, sans-serif">-<br>
+            </font></td>
+            <td valign="top"><font face="Helvetica, Arial, sans-serif">SUB<br>
+            </font></td>
+          </tr>
+          <tr>
+            <td valign="top"><b><font
+ face="Helvetica, Arial, sans-serif">Multiplication<br>
+            </font></b></td>
+            <td valign="top"><font face="Helvetica, Arial, sans-serif">*<br>
+            </font></td>
+            <td valign="top"><font face="Helvetica, Arial, sans-serif">MUL<br>
+            </font></td>
+          </tr>
+          <tr>
+            <td valign="top"><b><font
+ face="Helvetica, Arial, sans-serif">Division<br>
+            </font></b></td>
+            <td valign="top"><font face="Helvetica, Arial, sans-serif">/<br>
+            </font></td>
+            <td valign="top"><font face="Helvetica, Arial, sans-serif">DIV<br>
+            </font></td>
+          </tr>
+          <tr>
+            <td valign="top"><b><font
+ face="Helvetica, Arial, sans-serif">Bitwise Shift Operators<br>
+            </font></b></td>
+            <td valign="top"><font face="Helvetica, Arial, sans-serif">&lt;&lt;;
+&gt;&gt;<br>
+            </font></td>
+            <td valign="top"><font face="Helvetica, Arial, sans-serif">SLL;
+SRA<br>
+            </font></td>
+          </tr>
+          <tr>
+            <td valign="top"><b><font
+ face="Helvetica, Arial, sans-serif">Bitwise AND<br>
+            </font></b></td>
+            <td valign="top"><font face="Helvetica, Arial, sans-serif">&amp;<br>
+            </font></td>
+            <td valign="top"><font face="Helvetica, Arial, sans-serif">AND<br>
+            </font></td>
+          </tr>
+          <tr>
+            <td valign="top"><b><font
+ face="Helvetica, Arial, sans-serif">Bitwise OR<br>
+            </font></b></td>
+            <td valign="top"><font face="Helvetica, Arial, sans-serif">|<br>
+            </font></td>
+            <td valign="top"><font face="Helvetica, Arial, sans-serif">OR<br>
+            </font></td>
+          </tr>
+          <tr>
+            <td valign="top"><b><font
+ face="Helvetica, Arial, sans-serif">Bitwise XOR<br>
+            </font></b></td>
+            <td valign="top"><font face="Helvetica, Arial, sans-serif">^<br>
+            </font></td>
+            <td valign="top"><font face="Helvetica, Arial, sans-serif">XOR<br>
+            </font></td>
+          </tr>
+          <tr>
+            <td valign="top"><b><font
+ face="Helvetica, Arial, sans-serif">Assignment<br>
+            </font></b></td>
+            <td valign="top"><font face="Helvetica, Arial, sans-serif">=<br>
+            </font></td>
+            <td valign="top"><font face="Helvetica, Arial, sans-serif">implicit
+in
+operation<br>
+            </font></td>
+          </tr>
+        </tbody>
+      </table>
+      <font face="Helvetica, Arial, sans-serif"><br>
+Remembering opcodes is often a challenge for inexperienced assembly
+language programmers. The most common approach to this problem is to
+print out a list of the machine opcodes, from documentation or a
+textbook, and use this as a reference when writing code. In practice up
+to 90 percent of assembler is written using 10 percent of the various
+opcodes available. With a bit of practice a learner will soon remember
+the syntax of the most commonly used opcodes.<br>
+      <br>
+      </font><font face="Helvetica, Arial, sans-serif">Managing
+variables in registers is another specific difference between high
+level languages and assembly code. In most high level languages, at the
+beginning of a program the programmer will declare all of the variables
+to be used in the program, and in many languages, the compiler or
+interpreter insists on this and will complain if it is not done.<br>
+      <br>
+      <font face="Courier New, Courier, monospace">main(){<br>
+int myvar1;<br>
+char myvar2;<br>
+int myvar3;<br>
+      <br>
+code is here<br>
+} /* end program */<br>
+      </font><br>
+In an assembly language program, the programmer must keep track of what
+variable is sitting in what register or what location in the machine
+memory. One of the most common causes of bugs in assembler is where the
+programmer has lost track of what variable is placed in which register,
+at what time.<br>
+      <br>
+Good practice is therefore to record what variables are placed into
+which registers and when. The best place to do this is within the
+program, using
+comments, usually at the start of the program, subroutine or block of
+code. An example is:<br>
+      <br>
+      <font face="Courier New, Courier, monospace"># </font></font><font
+ face="Helvetica, Arial, sans-serif"><font
+ face="Courier New, Courier, monospace">int myvar1 in $16<br>
+# char myvar2 in $17<br>
+# int myvar3 in $18<br>
+      </font></font><br>
+      <font face="Helvetica, Arial, sans-serif">Or<br>
+      <br>
+      </font><font face="Helvetica, Arial, sans-serif"><font
+ face="Courier New, Courier, monospace"># </font></font><font
+ face="Helvetica, Arial, sans-serif"><font
+ face="Courier New, Courier, monospace">int myvar1 in $t0<br>
+# char myvar2 in $t1<br>
+# int myvar3 in $t2<br>
+      </font></font><font face="Helvetica, Arial, sans-serif"><br>
+Often the variables
+occupy more space than is available within the small number of
+registers, an example might be an array of numbers. Therefore variables
+will be stored in memory, either in a fixed reserved location or on a
+stack. If this is the case, the programmer must reserve the memory
+locations needed, and when an operation needs to be performed, only the
+variables being operated upon are loaded into registers, the operation
+performed, and then the results are written back to memory.</font><br>
+      <br>
+Let's assume that our three variables are kept in memory when they are
+not being worked with, which is a reasonable assumption if we have
+hundreds of variables in a complicated program.<br>
+      <br>
+At this point we must digress to discuss how an assembler treats the
+available memory in the machine. That memory is used to store program
+instructions, fixed data like constants or error message strings,
+variables in fixed or <font face="Helvetica, Arial, sans-serif">&#8220;static&#8221;
+locations, and usually a stack for function calls.<br>
+      <br>
+The assembler keeps track of how the memory is being managed by
+dividing it into sections, which are each reserved for a specific
+purpose.<br>
+      <br>
+The two sections we are most interested in at this point are the <font
+ face="Courier New, Courier, monospace">.text</font> section where
+program instructions are kept, and the <font
+ face="Courier New, Courier, monospace">.data</font> section where
+constants and variables are kept. </font><br>
+      <font face="Helvetica, Arial, sans-serif"><br>
+Consider this example:<br>
+      <br>
+      <font face="Courier New, Courier, monospace">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+.data<br>
+n:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .space 4<br>
+prom:&nbsp;&nbsp; .asciiz "Type a number: "<br>
+res:&nbsp;&nbsp;&nbsp; .asciiz "Result is: "<br>
+nl:&nbsp;&nbsp;&nbsp;&nbsp; .asciiz "\n"<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .text<br>
+main:&nbsp;&nbsp; li $v0, 4&nbsp;&nbsp;&nbsp;&nbsp; # print str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; la $a0, prom&nbsp; # at prom</font><br>
+      <br>
+The</font><font face="Helvetica, Arial, sans-serif"><font
+ face="Courier New, Courier, monospace"> .data</font></font><font
+ face="Helvetica, Arial, sans-serif">&nbsp; section here stores one
+number variable <font face="Courier New, Courier, monospace">n</font>
+and three text string constants <font
+ face="Courier New, Courier, monospace">prom, res</font> and <font
+ face="Courier New, Courier, monospace">nl</font>. Since the MIPS
+assembler program is designed to be helpful to the programmer, it
+allows these variables and constant strings to be declared using
+comfortable high level style syntax:<br>
+      <br>
+      </font><font face="Helvetica, Arial, sans-serif"><font
+ face="Courier New, Courier, monospace">res:&nbsp;&nbsp;&nbsp; .asciiz
+"Result is: "</font></font><br>
+      <font face="Helvetica, Arial, sans-serif"><br>
+The colon following </font><font face="Helvetica, Arial, sans-serif"><font
+ face="Courier New, Courier, monospace">res: <font
+ face="Helvetica, Arial, sans-serif">says that <i>res</i> is a label, </font></font></font>the&nbsp;
+directive <font face="Helvetica, Arial, sans-serif"><font
+ face="Courier New, Courier, monospace">.asciiz </font></font>says
+what kind of a label, in this case an ASCII string, and the quoted <font
+ face="Helvetica, Arial, sans-serif"><font
+ face="Courier New, Courier, monospace">"Result is: "</font></font>says
+that the string being stored is: <font
+ face="Helvetica, Arial, sans-serif"><font
+ face="Courier New, Courier, monospace">"<font
+ face="Helvetica, Arial, sans-serif"><i>Result is: </i></font>"</font></font>.
+The same applies to <font face="Helvetica, Arial, sans-serif"><font
+ face="Courier New, Courier, monospace">n:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+.space 4</font></font>, which says that memory space for four (4) bytes
+must be reserved for variable <i>n</i>.<br>
+      <br>
+As MIPS is a 32-bit architecture, it is a proper practice to align the
+stored variables in memory on 32-bit boundaries, which is usually done
+by adding the directive <font face="Courier New, Courier, monospace">.align
+2</font> after the <font face="Courier New, Courier, monospace">.data</font>
+directive.<br>
+      <br>
+Assume we want to reserve memory storage for a 64-bit longword, then
+the syntax for the declaration is:<br>
+      <br>
+      <font face="Courier New, Courier, monospace">&nbsp;&nbsp;&nbsp;
+.data<br>
+&nbsp;&nbsp;&nbsp; .align 2<br>
+my_longword:&nbsp;&nbsp;&nbsp; .space 8</font><br>
+      <br>
+So returning back to our original example, assume our variables are
+kept in memory most of the time rather than occupying scarce registers
+permanently. How would we actually do this?<br>
+      <br>
+      <font face="Courier New, Courier, monospace">&nbsp;&nbsp;&nbsp;
+.data<br>
+&nbsp;&nbsp;&nbsp; .align 2<br>
+myvar1:&nbsp;&nbsp;&nbsp; .space 4&nbsp; # int myvar1<br>
+      </font><font face="Courier New, Courier, monospace">myvar2:&nbsp;&nbsp;&nbsp;
+.space 1&nbsp; # char myvar2<br>
+      </font><font face="Courier New, Courier, monospace">myvar3:&nbsp;&nbsp;&nbsp;
+.space 4&nbsp; # int myvar3</font><br>
+      <br>
+Now let's assume we wish to perform a basic calculation using one of
+these variables. To do so we must put the variables in question into
+registers, do the calculation, and then put the result back. How do we
+do this?<br>
+      <br>
+      <font face="Courier New, Courier, monospace"># myvar3 = myvar1 +
+myvar3 - add and put result into myvar3<br>
+# myvar1 is loaded into temporary register $t0; myvar1 is loaded into
+$t1<br>
+lw $t0, </font><font face="Courier New, Courier, monospace">myvar1</font><font
+ face="Courier New, Courier, monospace">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+# </font><font face="Courier New, Courier, monospace">myvar1 into $t0</font><br>
+      <font face="Courier New, Courier, monospace">lw $t1, </font><font
+ face="Courier New, Courier, monospace">myvar3</font><font
+ face="Courier New, Courier, monospace">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # </font><font
+ face="Courier New, Courier, monospace">myvar3 into $t1</font><br>
+      <font face="Courier New, Courier, monospace">add $t2, $t1,
+$t0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # add $t1 and $t2 and put
+result into $t2<br>
+sw $t2, </font><font face="Courier New, Courier, monospace">myvar3</font><font
+ face="Courier New, Courier, monospace">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+# store in </font><font face="Courier New, Courier, monospace">myvar3</font><br>
+      <br>
+      <font face="Helvetica, Arial, sans-serif">Most assemblers will
+aid the programmer by providing helpful labels for registers which are
+by convention used for particular tasks [refer below "<b>MIPS Registers</b>"].
+Mostly we put temporary variables into </font><font
+ face="Courier New, Courier, monospace">$t0, ..., $t7 </font>which are
+labels for actual CPU registers named <font
+ face="Courier New, Courier, monospace">$8, ..., $15</font>.<br>
+      <font face="Helvetica, Arial, sans-serif"><br>
+At this point we can therefore set up variables, load variables into
+registers, do arithmetic or logic operations on them, and save them
+back to memory. Is this enough to write useful programs? Only if we do
+not want to have the code run loops. For looping we need to use control
+flow instructions and make decisions.<br>
+      <br>
+Consider the following example:<br>
+      <br>
+      <font face="Courier New, Courier, monospace">myloop:</font><br>
+      </font><font face="Courier New, Courier, monospace">&nbsp;&nbsp;&nbsp;
+lw $t0, </font><font face="Courier New, Courier, monospace">myvar1</font><font
+ face="Courier New, Courier, monospace">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+# </font><font face="Courier New, Courier, monospace">myvar1 into $t0</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <font face="Courier New, Courier, monospace">lw $t1, </font><font
+ face="Courier New, Courier, monospace">myvar3</font><font
+ face="Courier New, Courier, monospace">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # </font><font
+ face="Courier New, Courier, monospace">myvar3 into $t1</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <font face="Courier New, Courier, monospace">add $t2, $t1,
+$t0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # add $t1 and $t2 and put
+result into $t2<br>
+&nbsp;&nbsp;&nbsp; sw $t2, </font><font
+ face="Courier New, Courier, monospace">myvar3</font><font
+ face="Courier New, Courier, monospace">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+# store in </font><font face="Courier New, Courier, monospace">myvar3<br>
+&nbsp;&nbsp;&nbsp; j
+myloop&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+# unconditionally jump to myloop</font><br>
+      <br>
+This is a dumb loop since it cannot terminate, and will thus loop
+forever. A smarter loop can test a condition and then decide to
+continue or loop again.<br>
+      <br>
+      <font face="Helvetica, Arial, sans-serif"><font
+ face="Courier New, Courier, monospace">myloop:</font><br>
+      </font><font face="Courier New, Courier, monospace">&nbsp;&nbsp;&nbsp;
+lw $t0, </font><font face="Courier New, Courier, monospace">myvar1</font><font
+ face="Courier New, Courier, monospace">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+# </font><font face="Courier New, Courier, monospace">myvar1 into $t0</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <font face="Courier New, Courier, monospace">lw $t0, </font><font
+ face="Courier New, Courier, monospace">myvar3</font><font
+ face="Courier New, Courier, monospace">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # </font><font
+ face="Courier New, Courier, monospace">myvar3 into $t1</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <font face="Courier New, Courier, monospace">add $t2, $t1,
+$t0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # add $t1 and $t2 and put
+result into $t2<br>
+&nbsp;&nbsp;&nbsp; sw $t2, </font><font
+ face="Courier New, Courier, monospace">myvar3</font><font
+ face="Courier New, Courier, monospace">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+# store in </font><font face="Courier New, Courier, monospace">myvar3<br>
+&nbsp;&nbsp;&nbsp; beq $t2, 10,
+done&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # branch to "done" if $t2 is
+equal to 10<br>
+&nbsp;&nbsp;&nbsp; j
+myloop&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+# unconditionally jump to myloop<br>
+      </font><font face="Helvetica, Arial, sans-serif"><font
+ face="Courier New, Courier, monospace">done:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ......</font><br>
+      <br>
+In this loop, we test whether the result is 10 and if so, we exit the
+loop by jump to the label <font face="Courier New, Courier, monospace">done</font>.
+We now have the capability to execute loops in our code. Is that enough
+to write useful programs? Not quite, since we really want to be able to
+perform at a minimum some basic I/O to read from a keyboard or write
+text to a display or printer.<br>
+      <br>
+Both are complicated functions which require many assembly code
+instructions to write, which is inconvenient. So the mechanism used
+with most assemblers is to put these functions into a system call
+library, and call them when needed, with some argument for the I/O. For
+this we make use of the <font face="Courier New, Courier, monospace">syscall</font>
+facility in SPIM, short for </font><font
+ face="Helvetica, Arial, sans-serif">&#8220;</font><font
+ face="Helvetica, Arial, sans-serif">system call</font><font
+ face="Helvetica, Arial, sans-serif">&#8221;</font><font
+ face="Helvetica, Arial, sans-serif">. The way syscall works is that
+the programmer first sets up first the arguments for </font><font
+ face="Helvetica, Arial, sans-serif"><font
+ face="Courier New, Courier, monospace">syscall,</font></font><font
+ face="Helvetica, Arial, sans-serif"> which is a number identifying
+what call to be executed, by putting this number into<font
+ face="Courier New, Courier, monospace"> $v0</font>, and then puts the
+function argument into <font face="Courier New, Courier, monospace">$a0</font>.
+Then <font face="Courier New, Courier, monospace">syscall</font> is
+executed, and the system call will look at the values the programmer
+put into <font face="Courier New, Courier, monospace">$v0</font> and<font
+ face="Courier New, Courier, monospace"> $a0</font>, and make use of
+them. The SPIM reference provides a table of various system calls and
+their arguments. Note that system calls in operating systems usually
+employ the same technique.<br>
+      <br>
+The program <font face="Courier New, Courier, monospace">try.s</font>
+is an example using <font face="Courier New, Courier, monospace">syscall</font>
+for inputs and for outputs.<br>
+      </font>
+      <pre>.data<br>n:      .space 4<br>prom:   .asciiz "Type a number: "<br>res:    .asciiz "Result is: "<br>nl:     .asciiz "\n"<br><br>        .text<br>main:   li $v0, 4     # print str<br>        la $a0, prom  # at prom<br>        syscall<br><br>        li $v0, 5     # read int<br>        syscall<br>        sw $v0, n     # store in n<br><br>        li $v0, 4     # print str<br>        la $a0, res   # at res<br>        syscall<br><br>        li $v0, 1     # print int<br>        lw $t0, n          # n<br>        sub $t1, $t0, 1    # n-1<br>        mul $t0, $t0, $t1  # *<br>        sra $a0, $t0, 1    # /2<br>        syscall<br><br>        li $v0, 4     # print str<br>        la $a0, nl    # at nl<br>        syscall<br><br>        li $v0, 10    # exit<br>        syscall</pre>
+Is this enough to start writing in assembly code? At a minimum, yes,
+although a beginner will need to practice a little with a simulator
+like SPIM to become comfortable with how instructions actually work.<font
+ face="Helvetica, Arial, sans-serif"><br>
+      <br>
+      </font></td>
+      <td valign="top" width="64"><font
+ face="Helvetica, Arial, sans-serif"><br>
+      </font></td>
+    </tr>
+    <tr>
+      <td valign="top"><br>
+      </td>
+      <td valign="top">
+      <hr size="2" width="100%"><big><big><b>MIPS Registers </b></big></big><br>
+      <hr size="2" width="100%"><br>
+      <div align="justify">MIPS assemblers are usually designed to help
+the programmer with mnemonic labels, and reserve specific registers for
+specific uses.<br>
+      </div>
+      <br>
+      <table class="wikitable" width="100%" align="center">
+        <tbody>
+          <tr>
+            <th align="left">Register Number</th>
+            <th align="left">Name</th>
+            <th align="left">Comments</th>
+          </tr>
+          <tr>
+            <td><font face="Courier New, Courier, monospace">$0</font></td>
+            <td><font face="Courier New, Courier, monospace">$zero</font></td>
+            <td>Always zero</td>
+          </tr>
+          <tr>
+            <td><font face="Courier New, Courier, monospace">$1</font></td>
+            <td><font face="Courier New, Courier, monospace">$at</font></td>
+            <td>Reserved for assembler</td>
+          </tr>
+          <tr>
+            <td><font face="Courier New, Courier, monospace">$2, $3</font></td>
+            <td><font face="Courier New, Courier, monospace">$v0, $v1</font></td>
+            <td>First and second return values, respectively</td>
+          </tr>
+          <tr>
+            <td><font face="Courier New, Courier, monospace">$4, ..., $7</font></td>
+            <td><font face="Courier New, Courier, monospace">$a0, ...,
+$a3</font></td>
+            <td>First four arguments to functions</td>
+          </tr>
+          <tr>
+            <td><font face="Courier New, Courier, monospace">$8, ...,
+$15</font></td>
+            <td><font face="Courier New, Courier, monospace">$t0, ...,
+$t7</font></td>
+            <td>Temporary registers</td>
+          </tr>
+          <tr>
+            <td><font face="Courier New, Courier, monospace">$16, ...,
+$23</font></td>
+            <td><font face="Courier New, Courier, monospace">$s0, ...,
+$s7</font></td>
+            <td>Saved registers</td>
+          </tr>
+          <tr>
+            <td><font face="Courier New, Courier, monospace">$24, $25</font></td>
+            <td><font face="Courier New, Courier, monospace">$t8, $t9</font></td>
+            <td>More temporary registers</td>
+          </tr>
+          <tr>
+            <td><font face="Courier New, Courier, monospace">$26, $27</font></td>
+            <td><font face="Courier New, Courier, monospace">$k0, $k1</font></td>
+            <td>Reserved for kernel (operating system)</td>
+          </tr>
+          <tr>
+            <td><font face="Courier New, Courier, monospace">$28</font></td>
+            <td><font face="Courier New, Courier, monospace">$gp</font></td>
+            <td>Global pointer</td>
+          </tr>
+          <tr>
+            <td><font face="Courier New, Courier, monospace">$29</font></td>
+            <td><font face="Courier New, Courier, monospace">$sp</font></td>
+            <td>Stack pointer</td>
+          </tr>
+          <tr>
+            <td><font face="Courier New, Courier, monospace">$30</font></td>
+            <td><font face="Courier New, Courier, monospace">$fp</font></td>
+            <td>Frame pointer</td>
+          </tr>
+          <tr>
+            <td><font face="Courier New, Courier, monospace">$31</font></td>
+            <td><font face="Courier New, Courier, monospace">$ra</font></td>
+            <td valign="top">Return address</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+From [3].<br>
+      <br>
+      </td>
+      <td valign="top"><br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><font face="Helvetica, Arial, sans-serif"><br>
+      </font></td>
+      <td valign="top" align="justify">
+      <hr size="2" width="100%"><font
+ face="Helvetica, Arial, sans-serif"><big><big><b>Further Reading:</b></big></big><br>
+      </font>
+      <hr size="2" width="100%"><br>
+      <ol>
+        <li><a
+ href="http://www.stanford.edu/class/cs143/materials/other/SPIM_Manual.pdf">http://www.stanford.edu/class/cs143/materials/other/SPIM_Manual.pdf</a>
+[Recommended]</li>
+        <li><font face="Helvetica, Arial, sans-serif"><a
+ href="http://en.wikibooks.org/wiki/MIPS_Assembly/MIPS_Instructions">http://en.wikibooks.org/wiki/MIPS_Assembly/MIPS_Instructions</a></font></li>
+        <li><font face="Helvetica, Arial, sans-serif"><a
+ href="http://en.wikibooks.org/wiki/MIPS_Assembly/MIPS_Details">http://en.wikibooks.org/wiki/MIPS_Assembly/MIPS_Details</a><br>
+          </font></li>
+        <li><font face="Helvetica, Arial, sans-serif"><a
+ href="http://en.wikipedia.org/wiki/MIPS_architecture">http://en.wikipedia.org/wiki/MIPS_architecture</a></font></li>
+      </ol>
+      </td>
+      <td valign="top" width="64"><font
+ face="Helvetica, Arial, sans-serif"><br>
+      </font></td>
+    </tr>
+    <tr>
+      <td valign="top"><font face="Helvetica, Arial, sans-serif"><br>
+      </font></td>
+      <td valign="top">
+      <hr size="2" width="100%"><big><big><b>Useful Downloads</b></big></big><br>
+      <hr size="2" width="100%"><br>
+      <a href="mips_ref.pdf">MIPS Reference Sheet</a><br>
+      </td>
+      <td valign="top" width="64"><font
+ face="Helvetica, Arial, sans-serif"><br>
+      </font></td>
+    </tr>
+    <tr>
+      <td valign="top"><font face="Helvetica, Arial, sans-serif"><br>
+      </font></td>
+      <td valign="top"><br>
+      </td>
+      <td valign="top" width="64"><font
+ face="Helvetica, Arial, sans-serif"><br>
+      </font></td>
+    </tr>
+    <tr>
+      <td valign="top"><font face="Helvetica, Arial, sans-serif"><br>
+      </font></td>
+      <td valign="top">
+      <hr size="2" width="100%"><font
+ face="Helvetica, Arial, sans-serif"><br>
+      </font></td>
+      <td valign="top" width="64"><font
+ face="Helvetica, Arial, sans-serif"><br>
+      </font></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+</body>
+</html>
